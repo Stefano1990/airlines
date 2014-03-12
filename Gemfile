@@ -31,6 +31,8 @@ gem 'sidekiq'
 gem 'sidetiq'
 gem 'haml'
 gem 'mechanize'
+gem 'rb-readline'
+gem 'chartkick'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
