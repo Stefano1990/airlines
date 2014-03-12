@@ -5,6 +5,7 @@ Airlines::Application.routes.draw do
   resources :worlds
   resources :airlines
   resources :routes
+  resources :aircraft_configurations
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312123648) do
+ActiveRecord::Schema.define(version: 20140312161205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aircraft_configurations", force: true do |t|
+    t.integer  "aircraft_type_id"
+    t.integer  "airline_id"
+    t.string   "name"
+    t.integer  "first_seats"
+    t.integer  "business_seats"
+    t.integer  "economy_seats"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "aircraft_types", force: true do |t|
     t.integer  "manufacturer_id"
@@ -38,6 +49,8 @@ ActiveRecord::Schema.define(version: 20140312123648) do
     t.datetime "lease_end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "aircraft_type_id"
+    t.integer  "aircraft_configuration_id"
   end
 
   create_table "airlines", force: true do |t|
@@ -73,6 +86,19 @@ ActiveRecord::Schema.define(version: 20140312123648) do
     t.float    "adjusted_min_runway_length"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "flights", force: true do |t|
+    t.integer  "route_id"
+    t.integer  "airline_id"
+    t.integer  "departure_airport_id"
+    t.integer  "arrival_airport_id"
+    t.integer  "first_pax"
+    t.integer  "business_pax"
+    t.integer  "economy_pax"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "aircraft_id"
   end
 
   create_table "routes", force: true do |t|

@@ -63,15 +63,24 @@
             %option Birmginham
             %option London LTN
 .row
+  .col-lg-12
+    %ul.nav.nav-tabs
+      %li.dropdown
+        %a{href: "#"} Market research
+        %a{href: "#"} Competition
+.row
   .col-md-4
-    %h4 Departure airport
-    %dl.dl-horizontal
-      %dt Name:
-      %dd= @departure_airport.name
-      %dt Code:
-      %dd= @departure_airport.code
-      %dt Country:
-      %dd= @departure_airport.country
+    .panel.panel-default
+      .panel-heading
+        Departure airport
+      .panel-body
+        %dl.dl-horizontal
+          %dt Name:
+          %dd= @departure_airport.name
+          %dt Code:
+          %dd= @departure_airport.code
+          %dt Country:
+          %dd= @departure_airport.country
 
   .col-md-4
     #map_canvas{ style: 'width: 100%; height: 300px;' }
