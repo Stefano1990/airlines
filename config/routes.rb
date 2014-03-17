@@ -6,6 +6,10 @@ Airlines::Application.routes.draw do
   resources :airlines
   resources :routes
   resources :aircraft_configurations
+  resources :aircraft_types
+  resources :aircrafts
+
+  get 'get_quote' => 'manufacturers#get_quote'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

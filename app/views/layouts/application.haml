@@ -6,7 +6,7 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     = csrf_meta_tags
-  %body
+  %body{ class: "#{params[:controller]}-#{params[:action]}" }
     .navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
@@ -36,8 +36,8 @@
                 Aircraft
                 %span.caret
               %ul.dropdown-menu{"aria-labelledby" => "download"}
-                %li
-                  = link_to "Configurations", aircraft_configurations_path
+                %li= link_to "Configurations", aircraft_configurations_path
+                %li= link_to "Aircraftlist", aircraft_types_path
                 %li
                   %a{href: "./bootstrap.css"} bootstrap.css
                 %li.divider
@@ -45,12 +45,8 @@
                   %a{href: "./variables.less"} variables.less
                 %li
                   %a{href: "./bootswatch.less"} bootswatch.less
-          %p.navbar-text
-            = @world.time.strftime("%e. %b, %Y - %H:%M")
+          %p.navbar-text= @world.time.strftime("%e. %b, %Y - %H:%M")
+          %p.navbar-text= number_to_currency current_airline.bank_account.balance
           %ul.nav.navbar-nav.navbar-right
-            %li
-              %a{href: "http://builtwithbootstrap.com/", target: "_blank"} Built With Bootstrap
-            %li
-              %a{href: "https://wrapbootstrap.com/?ref=bsw", target: "_blank"} WrapBootstrap
   .container
     = yield

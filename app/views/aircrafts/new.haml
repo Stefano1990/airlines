@@ -1,0 +1,111 @@
+.page-header
+  .row
+    .col-lg-12
+      %h1 New aircraft
+.row
+  .col-lg-8
+    = form_for @aircraft, html: { class: 'form-horizontal' } do |f|
+      .form-group
+        .col-sm-10
+          %h3 Engines
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                %th Manufacturer
+                %th Type
+                %th Fuel flow
+                %th Price
+                %th Minimum runway
+                %th Noise class
+            %tbody
+              %tr
+                %td
+                  %input{ type: 'radio', name: 'options', value: 'op1' }
+                %td GE
+                %td GE-90
+                %td 52200
+                %td 120000
+                %td 8'300 ft
+                %td 3
+              %tr
+                %td
+                  %input{ type: 'radio', name: 'options', value: 'op1' }
+                %td GE
+                %td GE-91
+                %td 52200
+                %td 120000
+                %td 6'500 ft
+                %td 4
+      .form-group
+        .col-sm-10
+          %h3 Configuration
+          %table#aircraft-configurations.table.table-striped
+            %thead
+              %tr
+                %th
+                %th Name
+                %th First seats
+                %th Busines seats
+                %th Economy seats
+                %th Costs to fit
+            %tbody
+              - @aircraft_configurations.each do |configuration|
+                %tr
+                  %td
+                    %input{ type: 'radio', name: 'configuration', value: configuration.id, data: { costs_to_fit: configuration.costs_to_fit} }
+                  %td= configuration.name
+                  %td= configuration.first_seats
+                  %td= configuration.business_seats
+                  %td= configuration.economy_seats
+                  %td 200'000
+    .row
+      .col-md-12
+        %h3 Get offer
+        = form_tag({controller: 'manufacturers', action: 'get_quote'}, method: :get, remote: true) do
+          Selected configuration:
+          Selected engines:
+          Number of planes:
+          = submit_tag 'go'
+    .row
+      .col-md-6
+        %h3 Costs to lease
+        %table.table
+          %thead
+          %tbody
+            %tr
+              %td Engines:
+              %td 200'000
+            %tr
+              %td Seating configuration:
+              %td 300'000
+            %tr
+              %td Bulk discount:
+              %td -40'000
+            %tr
+              %td Total:
+              %td $350'000/month
+      .col-md-6
+        %h3 Costs to buy
+        %table.table
+          %thead
+          %tbody
+            %tr
+              %td Engines:
+              %td 200'000
+            %tr
+              %td Seating configuration:
+              %td 300'000
+            %tr
+              %td Bulk discount:
+              %td -40'000
+            %tr
+              %td Total:
+              %td $350'000/month
+  .col-lg-4
+    = escape_javascript @aircraft_configurations.to_json()
+    = image_tag 'http://upload.wikimedia.org/wikipedia/commons/f/f6/Britannia_Airways_Boeing_737-200_at_Zurich_Airport_in_May_1985.jpg', style: 'width:200px;'
+:javascript
+  $(document).ready(function() {
+    //new window.Controller("#{escape_javascript @aircraft_configurations.to_json()}");
+  });

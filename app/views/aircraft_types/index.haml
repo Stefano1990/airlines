@@ -1,0 +1,43 @@
+.page-header
+  .row
+    .col-lg-12
+      %h1 Aircrafts
+.row
+  .col-lg-12
+    %table.table.table-striped.tablesorter
+      %thead
+        %tr
+          %th Acquire
+          %th Status
+          %th Manufacturer
+          %th Aircraft Type
+          %th Base Price
+          %th Monthly Lease
+          %th Seats
+          %th Speed
+          %th Range
+          %th Turn time
+          %th Addons
+          %th Production Run
+          %th Production Rate
+      %tbody
+        %tr
+          %td{ colspan: 13 }
+            %h5 Boeing 737 Jurassic
+        - @aircraft_types.each_with_index do |type, i|
+          %tr
+            %td= link_to "Buy", new_aircraft_path(aircraft_type_id: type.id), class: 'btn btn-primary'
+            %td ..
+            %td= link_to "Boeing", '#'
+            %td= link_to type.name, aircraft_type_path(type)
+            %td= number_to_currency type.base_price
+            %td= number_to_currency type.monthly_lease
+            %td= type.max_seats
+            %td= type.average_speed
+            %td= type.range
+            %td= type.turn_time
+            %td ..
+            %td ..
+            %td ..
+:javascript
+  $(".table").tablesorter();

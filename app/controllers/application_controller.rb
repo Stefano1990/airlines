@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   def find_world
     @world = @world || World.first
   end
+
+  def current_airline
+    @current_airline = @current_airline || Airline.first
+  end
+  helper_method :current_airline
 end

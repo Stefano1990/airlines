@@ -2,3 +2,37 @@
   .row
     .col-lg-12
       %h1 Aircraft Configurations
+.row
+  .col-lg-4
+    %h4 Make new configuration for:
+  .col-lg-8
+    = form_tag(new_aircraft_configuration_path, method: "get", class: 'form-inline') do
+      .form-group
+        = label_tag(:aircraft_type_id, 'Aircraft Type: ')
+        = select_tag(:aircraft_type_id, options_for_select(AircraftType.all.map{ |type| [type.name, type.id] }), class: 'form-control' )
+        = submit_tag("Go", class: 'btn btn-primary')
+.row
+  .col-lg-12
+    %table.table.table-striped.table-hover.tablesorter
+      %thead
+        %tr
+          %th #
+          %th Name
+          %th Aircraft
+          %th first seats
+          %th business seats
+          %th economy seats
+          %th
+      %tbody
+        - @aircraft_configurations.each_with_index do |config,i|
+          %tr
+            %td= i
+            %td= config.name
+            %td= config.aircraft_type.name
+            %td= config.first_seats
+            %td= config.business_seats
+            %td= config.economy_seats
+            %td
+              = link_to 'Edit', '#', class: 'btn btn-primary btn-xs'
+:javascript
+  $(".table").tablesorter();
